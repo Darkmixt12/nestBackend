@@ -11,6 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload';
 import { LoginResponse } from './interfaces/login-response';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { resolveSoa } from 'dns';
 
 @Injectable()
 export class AuthService {
@@ -95,6 +96,12 @@ export class AuthService {
 
   findOne(id: number) {
     return `This action returns a #${id} auth`;
+  }
+
+  async findUserById(id: string) {
+    const user = await this.userModel.findById(id)
+    const { password, ...res } = user.toJSON()
+    return res
   }
 
   update(id: number) {
