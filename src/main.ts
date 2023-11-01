@@ -5,6 +5,8 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+  
   
   // esto hace un mega bloqueo para hacer unas mega validaciones instalar npm i class-validator class-transformer
   app.useGlobalPipes(
